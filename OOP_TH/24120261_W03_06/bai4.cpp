@@ -16,24 +16,53 @@ public:
     friend Ngay operator+(int x, Ngay other);
     Ngay operator-(Ngay);
     friend Ngay operator-(int x, Ngay other);
-
+    Ngay &operator++();
+    Ngay operator++(int);
     bool operator>(Ngay);
     Ngay &operator=(Ngay &);
     friend ostream &operator<<(ostream &out, const Ngay &other);
-
+    int ktra_Nhuan();
     void chuanhoa();
+    static int Ngay_cua_thang[][12];
 };
+int Ngay::Ngay_cua_thang[][12] = {{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
+                                  {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}};
+int Ngay::ktra_Nhuan()
+{
+    if (nam % 400 == 0)
+        return 1;
+    return 0;
+}
 void Ngay::chuanhoa()
 {
     ngay = abs(ngay);
     thang = abs(thang);
     nam = abs(nam);
-    int thang_du = (ngay - 1) / 30;
-    thang += thang_du;
-    ngay = (ngay - 1) % 30 + 1;
-    int nam_du = (thang - 1) / 12;
-    nam += nam_du;
-    thang = (thang - 1) % 12 + 1;
+
+    while (thang > 12)
+    {
+        thang -= 12;
+        nam++;
+    }
+
+    int check = ktra_Nhuan();
+
+    while (ngay > Ngay_cua_thang[check][thang - 1])
+    {
+        ngay -= Ngay_cua_thang[check][thang - 1];
+        thang++;
+        if (thang > 12)
+        {
+            thang -= 12;
+            nam++;
+            check = ktra_Nhuan();
+        }
+    }
+    while (thang > 12)
+    {
+        thang -= 12;
+        nam++;
+    }
 }
 Ngay::Ngay()
 {
@@ -69,6 +98,18 @@ Ngay operator+(int x, Ngay other)
 {
     Ngay temp(x);
     return temp + other;
+}
+Ngay Ngay::operator++(int)
+{
+    Ngay temp(*this);
+    (*this)++;
+    return temp;
+}
+Ngay &Ngay::operator++()
+{
+    this->ngay += 1;
+    this->chuanhoa();
+    return *this;
 }
 Ngay Ngay::operator-(Ngay other)
 {
@@ -107,6 +148,8 @@ int main()
     Ngay n3(-10, 16, 2000);
     Ngay n4(1000);
     Ngay n5 = n2 + n3;
+    Ngay temp(5000);
+    cout << temp << "???" << endl;
     Ngay n6 = n1 + 5000;
     Ngay n7 = 1234 + n4;
     Ngay n8 = 190 + n6 + n7;

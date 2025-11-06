@@ -8,42 +8,46 @@ private:
 
 public:
     SoPhuc();
-    SoPhuc(const int &, const int &);
-    SoPhuc(const int &);
-    SoPhuc operator+(const SoPhuc &);
-    void operator<<(ostream &);
+    SoPhuc(const int&, const int&);
+    SoPhuc operator+(const int&);
+
+    void operator<<(ostream&);
 };
 
-SoPhuc::SoPhuc() : _thuc(0), _ao(0) {}
+SoPhuc::SoPhuc()
+{
+    _thuc = _ao = 0;
+}
+
 SoPhuc::SoPhuc(const int &t, const int &a)
 {
     _thuc = t;
     _ao = a;
 }
-SoPhuc::SoPhuc(const int &t) : SoPhuc()
+
+SoPhuc SoPhuc::operator+(const int &n)
 {
-    _thuc = t;
+    SoPhuc rt = *this;
+    rt._thuc += n;
+    return rt;
 }
-SoPhuc SoPhuc::operator+(const SoPhuc &sp)
+
+void SoPhuc::operator<<(ostream &os)
 {
-    SoPhuc temp = *this;
-    temp._thuc += sp._thuc;
-    temp._ao += sp._ao;
-    return temp;
-}
-void SoPhuc::operator<<(ostream &out)
-{
-    out << _thuc;
+    os << _thuc;
     if (_ao != 0)
     {
-        out << ((_ao < 0) ? "-" : " +") << _ao << "*i";
+        os << ((_ao > 0) ? " + " : " - ") << _ao << "*i";
     }
 }
 int main()
 {
     SoPhuc sp1(3, 5);
+    SoPhuc sp2 = sp1.operator+(10);
     SoPhuc sp3 = sp1 + 10;
     sp1.operator<<(cout);
+    cout << endl;
+    sp2.operator<<(cout);
     cout << endl;
     sp3.operator<<(cout);
     cout << endl;
