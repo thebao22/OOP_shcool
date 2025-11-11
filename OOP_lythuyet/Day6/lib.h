@@ -13,15 +13,14 @@ using namespace std;
 class Array
 {
 private:
-    double a;
-    int b;
     int size;
     int *arr;
 
 public:
     ~Array();
     Array(int size);
-    Array(int a[], int n);
+    //Array(int a[], int n);
+    Array(int *a, int n);
     Array(const Array &temp);
     Array();
 
@@ -58,7 +57,7 @@ private:
 public:
     void compute();
     Histogram() = default;
-    Histogram(int a[], int n);
+    Histogram(int *a, int n);
     Histogram(const Histogram &a);
     ~Histogram()
     {

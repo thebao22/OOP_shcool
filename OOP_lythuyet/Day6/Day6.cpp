@@ -12,7 +12,15 @@ Array::Array(int size)
     arr = new int[size]();
 }
 
-Array::Array(int a[], int n)
+// Array::Array(int a[], int n)
+// {
+//     this->size = n;
+//     arr = new int[size];
+//     for (int i = 0; i < n; i++)
+//         arr[i] = a[i];
+// }
+
+Array::Array(int *a, int n)
 {
     this->size = n;
     arr = new int[size];
@@ -182,22 +190,22 @@ istream &operator>>(istream &in, Array &array)
 //===IMPLEMENT HISTOGRAM CLASS
 void Histogram::compute()
 {
+
+    delete[] histogram;
+    histsize = Array::findmax();
+    histogram = new int[histsize + 1];
+    for (int i = 0; i <= histsize; i++)
     {
-        histsize = Array::findmax();
-        histogram = new int[histsize + 1];
-        for (int i = 0; i <= histsize; i++)
-        {
-            histogram[i] = 0;
-        }
-        for (int i = 0; i < Array::getSize(); i++)
-        {
-            int index = Array::getElement(i);
-            if (index <= histsize)
-                histogram[index]++;
-        }
+        histogram[i] = 0;
+    }
+    for (int i = 0; i < Array::getSize(); i++)
+    {
+        int index = Array::getElement(i);
+        if (index <= histsize)
+            histogram[index]++;
     }
 }
-Histogram::Histogram(int a[], int n) : Array(a, n)
+Histogram::Histogram(int *a, int n) : Array(a, n)
 {
     compute();
 }
