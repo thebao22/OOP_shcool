@@ -189,13 +189,14 @@ istream &operator>>(istream &in, Array &array)
 
 //===IMPLEMENT HistogramArray CLASS
 void HistogramArray::computeHist()
-{   delete[] histogram;
-    histogram = new int[histsize](); 
+{
+    delete[] histogram;
+    histogram = new int[histsize]();
     for (int i = 0; i < Array::getSize(); i++)
     {
         int index = Array::getElement(i);
         if (index < histsize)
-           histogram[index]++;
+            histogram[index]++;
     }
 }
 HistogramArray::HistogramArray(int *a, int n) : Array(a, n)
@@ -207,8 +208,9 @@ HistogramArray::HistogramArray(int *a, int n) : Array(a, n)
         histogram[i] = 0;
     }
 }
-HistogramArray::HistogramArray(int size_arr,int *a, int n): Array(a, size_arr){ 
-    histogram = new int[n](); 
+HistogramArray::HistogramArray(int size_arr, int *a, int n) : Array(a, size_arr)
+{
+    histogram = new int[n]();
     histsize = n;
 }
 
