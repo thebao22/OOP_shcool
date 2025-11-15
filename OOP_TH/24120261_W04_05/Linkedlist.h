@@ -4,6 +4,8 @@
 #include <cstring>
 #include <stdexcept>
 #include <cstdlib>
+#include <iomanip>
+#include <cmath>
 using namespace std;
 
 template <class T>
@@ -30,11 +32,16 @@ public:
     Node<T> *removeHead();
     Node<T> *removeTail();
 
+    int getSize() const;
     T &operator[](const int &) const;
 
     template <class U>
     friend ostream &operator<<(ostream &, const Linkedlist<U> &);
 };
+template <class T>
+int Linkedlist<T>::getSize() const{
+    return n;
+}
 template <class T>
 Node<T> *Linkedlist<T>::CreateNode(const T &_value)
 {
@@ -52,14 +59,14 @@ Linkedlist<T>::Linkedlist()
 template <class T>
 Linkedlist<T>::~Linkedlist()
 {
-    n = 0;
-    Node<T> *temp = head;
     while (head != nullptr)
     {
+        Node<T> *temp = head;
         head = head->pNext;
         delete temp;
-        temp = head;
     }
+    tail = nullptr;
+    n = 0;
 }
 template <class T>
 Node<T> *Linkedlist<T>::addHead(const T &_value)
@@ -103,39 +110,44 @@ template <class T>
 Node<T> *Linkedlist<T>::removeHead()
 {
     if (head == nullptr)
-        return nullptr;
+        throw std::out_of_range("List is empty");
+
     Node<T> *temp = head;
-    if (head == tail)
-    {
-        head = tail = nullptr;
-        n--;
-        return temp;
-    }
+    Node<T> *val = temp;
+
     head = head->pNext;
+    if (head == nullptr)
+        tail = nullptr;
+
+    delete temp;
     n--;
-    return temp;
+    return val;
 }
 template <class T>
 Node<T> *Linkedlist<T>::removeTail()
 {
     if (head == nullptr)
-        return nullptr;
-    Node<T> *temp = tail;
-    Node<T> *curr = head;
+        throw std::out_of_range("List is empty");
+
     if (head == tail)
     {
+        T val = head->value;
+        delete head;
         head = tail = nullptr;
         n--;
-        return temp;
+        return val;
     }
+
+    Node<T> *curr = head;
     while (curr->pNext != tail)
-    {
         curr = curr->pNext;
-    }
-    curr->pNext = nullptr;
+
+    Node<T> *val = tail;
+    delete tail;
     tail = curr;
+    tail->pNext = nullptr;
     n--;
-    return temp;
+    return val;
 }
 
 template <class T>
