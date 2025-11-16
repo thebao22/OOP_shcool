@@ -1,0 +1,15 @@
+ASUS ROG Strix Scar 18, ASUS, 20/02/2025, 65.000.000, 3.0, 120, Gaming, RTX 5090, 240Hz.
+
+Dell XPS 16 (2025), Dell, 15/01/2025, 55.000.000, 1.8, 90, VanPhong, USB-C, OLED TouchScreen.
+
+Lenovo ThinkPad X1 Carbon Gen12, Lenovo, 10/03/2025, 48.000.000, 1.1, 80, DoanhNhan, NO, 5G.
+
+MSI Stealth 17 Studio, MSI, 05/04/2025, 70.000.000, 2.4, 100, Gaming, RTX 5080, 144Hz.
+
+HP Spectre x360 16 (2025), HP, 25/02/2025, 52.000.000, 1.7, 85, VanPhong, HDMI, FoldableScreen.
+
+Acer Predator Triton 18X, Acer, 12/05/2025, 75.000.000, 3.2, 130, Gaming, Dual RTX 5060, 120Hz.
+
+MacBook Pro 16 M3 Ultra, Apple, 18/01/2025, 80.000.000, 1.9, 95, DoanhNhan, YES, 5G.
+
+LG Gram Pro 18, LG, 30/03/2025, 45.000.000, 1.2, 75, VanPhong, USB-C, FoldableScreen.
